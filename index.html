@@ -4,11 +4,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Lesson-5</title>
 </head>
 
 <body>
-    <script src="script.js"></script>
+    <script>
+        const product = {
+            name: 'Стол',
+            price: 2000,
+            count: 2,
+            userRegister: false,
+            reg: function () {
+                this.userRegister = true;
+            },
+            countBuy: function () {
+                if (this.count > 0) {
+                    console.log('Вы купили данный товар');
+                } else {
+                    console.log('Данный товар нельзя добавить в корзину');
+                }
+            },
+            buyProduct: function () {
+                if (this.userRegister) {
+                    console.log('Товар в корзине');
+                } else {
+                    console.log('Необходима регистрация');
+                }
+            }
+        }
+
+        let productSale = product;
+        productSale.price = 1500;
+        console.log(productSale);
+        console.log(product);
+
+        product.buyProduct();
+
+        for (const key in product) {
+            if (Object.hasOwnProperty.call(product, key)) {
+                const element = product[key];
+                console.log(element);
+            }
+        }
+    </script>
 </body>
 
 </html>
