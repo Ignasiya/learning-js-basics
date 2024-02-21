@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson-5</title>
+</head>
+
+<body>
+    <script>
+        const product = {
+            name: 'Стол',
+            price: 2000,
+            count: 2,
+            userRegister: false,
+            reg: function () {
+                this.userRegister = true;
+            },
+            countBuy: function () {
+                if (this.count > 0) {
+                    console.log('Вы купили данный товар');
+                } else {
+                    console.log('Данный товар нельзя добавить в корзину');
+                }
+            },
+            buyProduct: function () {
+                if (this.userRegister) {
+                    console.log('Товар в корзине');
+                } else {
+                    console.log('Необходима регистрация');
+                }
+            }
+        }
+
+        let productSale = product;
+        productSale.price = 1500;
+        console.log(productSale);
+        console.log(product);
+
+        product.buyProduct();
+
+        for (const key in product) {
+            if (Object.hasOwnProperty.call(product, key)) {
+                const element = product[key];
+                console.log(element);
+            }
+        }
+
+        const array = [1, 23, 45, 6, 85, 15];
+        console.log(array.map(item => item * 2)); // 2, 46, 90, 12, 170, 30
+        console.log(array.filter(item => item >= 10)); // 23, 45, 85, 15
+        console.log(array.some(item => item >= 10)); // true
+        console.log(array.reduce((acc, item) => acc + item)); // 175
+    </script>
+</body>
+
+</html>
