@@ -1,39 +1,59 @@
-const heading = document.querySelector('.title');
-const text = document.querySelectorAll('text');
+// СЕМИНАР
+const first = document.querySelector('div#block > p');
+console.log(first.innerHTML); // Для всего содержимого
+console.log(first.textContent); // Для текста
 
-heading.textContent = 'Заголовок из js';
+// и точнее и быстрее работает
+const www = document.querySelector("div#block > p.www");
 
-const heading2 = document.getElementById('heading');
-const heading3 = document.querySelector('#heading');
+const link = document.querySelector("a.link");
+link.textContent = 'link text js';
+link.href = "https://developer.mozilla.org/ru/";
 
-const listEls = document.getElementsByClassName('list');
-const listElsQs = document.querySelectorAll('.list');
+document.querySelector("img.photo").src = 'https://sport-sbor.ru/wp-content/uploads/2020/07/s1200.jpg';
 
-const getTag = document.getElementsByTagName('li');
+let newP = document.createElement("p");
+newP.textContent = "Новый тестовый элемент";
+const content = document.querySelector("div.content");
+content.appendChild(newP);
+newP.remove();
+newP = null; // не будет работать
 
-text.forEach(element => {
-    console.log(element);
+const button = document.createElement("button");
+content.appendChild(button);
+button.textContent = "Отправить";
+let counter = 0;
+button.addEventListener("click", (e) => {
+    counter++;
+    e.target.textContent = "Текст отправлен";
 });
 
-const headingEl = document.createElement('h3');
-headingEl.textContent = 'Мой первый заголовок';
-heading.appendChild(headingEl);
+// ДОМАШКА
+const superlink = document.getElementById("super_link");
+console.log(superlink);
 
-const heading4 = document.querySelector('#heading');
-heading4.remove();
+const cardlink = document.querySelectorAll("a.card-link");
+cardlink.forEach((element) => {
+    element.textContent = 'ссылка'
+});
 
-const buttonEl = document.querySelector('.btn');
-const contentEl = document.querySelector('.content');
+const cardlinkBody = document.querySelectorAll(".card-body a.card-link");
+console.log(cardlinkBody);
 
-const textEl = document.createElement('p');
-textEl.textContent = 'Тут любой текст и его много';
+const dataNumber = document.querySelectorAll('[data-number]');
+const elementWithNumber50 = Array.from(dataNumber).find(el => el.getAttribute('data-number') === '50');
+console.log(elementWithNumber50);
 
-buttonEl.onclick = () => {
-    buttonEl.textContent = 'Товар в корзине';
-    contentEl.appendChild(textEl);
-}
+console.log(document.querySelector('title').innerHTML);
 
-const imgEl = document.querySelector('.img');
-imgEl.onclick = () => {
-    imgEl.src = 'newphoto.jpg';
-}
+const cardTitle = document.querySelector(".card-title");
+console.log(cardTitle.parentNode);
+
+const create = document.createElement("div");
+create.innerHTML = 'Привет';
+document.querySelector('.card').prepend(create);
+
+const h6 = document.querySelectorAll("h6");
+h6.forEach((element) => {
+    element.remove();
+});
