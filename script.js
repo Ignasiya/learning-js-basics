@@ -1,59 +1,88 @@
-// СЕМИНАР
-const first = document.querySelector('div#block > p');
-console.log(first.innerHTML); // Для всего содержимого
-console.log(first.textContent); // Для текста
+"use strict"
 
-// и точнее и быстрее работает
-const www = document.querySelector("div#block > p.www");
+// Задание 1
+const divBlock = document.querySelector('div.block');
+const divItem = document.createElement('div');
 
-const link = document.querySelector("a.link");
-link.textContent = 'link text js';
-link.href = "https://developer.mozilla.org/ru/";
+divItem.setAttribute('class', 'block__item');
+divItem.setAttribute('class', divItem.classlist + ' block__item_1'); // Перезаписывает
+divItem.textContent = 'Элемент внутри';
 
-document.querySelector("img.photo").src = 'https://sport-sbor.ru/wp-content/uploads/2020/07/s1200.jpg';
+divBlock.appendChild(divItem);
 
-let newP = document.createElement("p");
-newP.textContent = "Новый тестовый элемент";
-const content = document.querySelector("div.content");
-content.appendChild(newP);
-newP.remove();
-newP = null; // не будет работать
+// Задание 2
+const pText = document.querySelector('div.elem div.content p.text'); // Можно без >
+console.log(pText.previousElementSibling);
+console.log(pText.previousSibling); // text
 
-const button = document.createElement("button");
-content.appendChild(button);
-button.textContent = "Отправить";
-let counter = 0;
-button.addEventListener("click", (e) => {
-    counter++;
-    e.target.textContent = "Текст отправлен";
+console.log(pText.parentElement);
+
+console.log(pText.parentElement.previousElementSibling.src);
+
+console.log(pText.parentElement.parentElement);
+
+// Задание 3
+const subtitle = document.querySelector('div.info h2.subtitle');
+let parent = subtitle.parentElement;
+
+while (parent) { // Пока не упреться в null, т.к. не вернет саму DOM
+    console.log(parent);
+    parent = parent.parentElement;
+}
+
+// Задание 4
+const btnSubmit = document.querySelector('form button.btn');
+const formInput = document.querySelectorAll('form input');
+
+btnSubmit.addEventListener('click', (event) => {
+    event.preventDefault();
+
+    const errorMessage = document.querySelector('form #error-message');
+
+    if (errorMessage) {
+        errorMessage.remove();
+    }
+
+    formInput.forEach((element) => {
+        if (element.value === '') {
+            if (!errorMessage) {
+                const error = document.createElement('h2');
+                error.textContent = 'Вы не заполнили поле ввода';
+                error.style.border = '1px solid red';
+                error.setAttribute('id', 'error-message');
+                element.parentElement.appendChild(error);
+            }
+        }
+    })
+})
+
+// Домашка
+const dropDown = document.querySelectorAll('div.dropdown div.menu a.dropdown-item');
+dropDown.forEach((element) => {
+    element.classList.add('super-dropdown')
 });
 
-// ДОМАШКА
-const superlink = document.getElementById("super_link");
-console.log(superlink);
+const btnEl = document.querySelector('div.dropdown button.btn');
+if (btnEl.classList.contains('btn-secondary')) {
+    btnEl.classList.remove('btn-secondary');
+} else {
+    btnEl.classList.add('btn-secondary');
+}
 
-const cardlink = document.querySelectorAll("a.card-link");
-cardlink.forEach((element) => {
-    element.textContent = 'ссылка'
-});
+const menuEl = document.querySelector('div.dropdown div.menu');
+if (menuEl.classList.contains('dropdown-menu')) {
+    menuEl.classList.remove("dropdown-menu");
+}
 
-const cardlinkBody = document.querySelectorAll(".card-body a.card-link");
-console.log(cardlinkBody);
+const dropdownEl = document.querySelector('div.dropdown');
+dropdownEl.insertAdjacentHTML('afterend', '<a href="#">link</a>');
 
-const dataNumber = document.querySelectorAll('[data-number]');
-const elementWithNumber50 = Array.from(dataNumber).find(el => el.getAttribute('data-number') === '50');
-console.log(elementWithNumber50);
+const menuButtonEl = document.querySelector('div.dropdown button#dropdownMenuButton');
+menuButtonEl.setAttribute('id', 'superDropdown');
+menuButtonEl.id = 'superDropdown'
 
-console.log(document.querySelector('title').innerHTML);
+const targetElement = document.querySelector('[aria-labelledby="dropdownMenuButton"]');
+targetElement.dataset.dd = '3';
 
-const cardTitle = document.querySelector(".card-title");
-console.log(cardTitle.parentNode);
-
-const create = document.createElement("div");
-create.innerHTML = 'Привет';
-document.querySelector('.card').prepend(create);
-
-const h6 = document.querySelectorAll("h6");
-h6.forEach((element) => {
-    element.remove();
-});
+const toggleEl = document.querySelector('div.dropdown button.dropdown-toggle');
+toggleEl.removeAttribute('type');

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .heading {
+            color: white;
+            text-transform: uppercase;
+            background-color: green;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content">
+        <p>Первый параграф</p>
+        <p>Второй параграф</p>
+        <p>Тритий параграф</p>
+    </div>
+    <ul class="menu">
+        <li class="menu__list"><a href="#" class="menu__link">link-2</a></li>
+        <li class="menu__list"><a href="#" class="menu__link">link-1</a></li>
+        <li class="menu__list"><a href="#" class="menu__link">link-3</a></li>
+        <li class="menu__list"><a href="#" class="menu__link">link-4</a></li>
+    </ul>
+    <script>
+        const content = document.querySelector('.content');
+
+        const h1El = document.createElement('h1');
+        h1El.textContent = 'h1 element';
+        h1El.style.backgroundColor = '#ccc';
+        h1El.style.textAlign = 'center';
+        h1El.setAttribute('class', 'heading');
+
+        const imgEl = document.createElement('img');
+        imgEl.src = 'photo.png';
+        imgEl.alt = 'photo';
+        imgEl.setAttribute('alt', 'coolPhoto');
+
+        content.appendChild(h1El);
+        content.appendChild(imgEl);
+
+        const liEls = document.querySelectorAll('.menu__list'); //Nodelist
+        const liEl = document.querySelector('.menu__list');
+        const linkEl = document.querySelector('menu__link');
+        const menuEl = document.querySelector('menu');
+
+        liEl.parentNode.childNodes; //Nodelist li
+        liEl.parentNode.children; //HTML:Collection li
+
+        linkEl.children;
+        linkEl.childNodes;
+
+        menuEl.childNodes; // с текстом TAB перед li
+        menuEl.children; // Только элементы
+
+        menuEl.children.forEach(element => {
+            console.log(element);
+        }); // Не может использовать методы массивов
+
+        menuEl.childNodes.forEach(element => {
+            console.log(element);
+        }); // Может использовать методы массивов
+
+        const studentsGroup1PraticeTime = [
+            {
+                lastName: 'Ivanov',
+                practiceTime: 56
+            },
+            {
+                lastName: 'Petrov',
+                practiceTime: 120
+            },
+            {
+                lastName: 'Sidorov',
+                practiceTime: 148
+            },
+            {
+                lastName: 'Belkin',
+                practiceTime: 20
+            },
+            {
+                lastName: 'Avdeev',
+                practiceTime: 160
+            }
+        ];
+
+        const studentsGroup2PraticeTime = [
+            {
+                lastName: 'Mankov',
+                practiceTime: 87
+            },
+            {
+                lastName: 'Kistin',
+                practiceTime: 133
+            },
+            {
+                lastName: 'Kotlyarov',
+                practiceTime: 140
+            },
+            {
+                lastName: 'Peskov',
+                practiceTime: 10
+            }
+        ];
+
+        /* Напишем не очень удобную, но показательную функцию, которая умеет принимать
+        неограниченное число аргументов и находить максимум среди них. Функция должна
+        вызываться подобным образом: const maximum = findMax(4, 7, 10);*/
+        function findMax() {
+            const values = arguments;
+            let maxValue = -Infinity;
+            for (let index = 0; index < values.length; index++) {
+                if (values[index] > maxValue) maxValue = values[index];
+            }
+            return maxValue;
+        };
+
+        const group1PracticeTime = studentsGroup1PracticeTime.map((student) => student.practiceTime);
+        const group2PracticeTime = studentsGroup2PracticeTime.map((student) => student.practiceTime);
+
+        // множество числовых аргументов, а у нас есть только массив — тут нам и поможет оператор spread.
+        const maxTimeFromGroup1 = findMax(...group1PracticeTime);
+        // вытянет из массива все элементы и передаст их в функцию как отдельные переменные.
+        // Это аналогично страшной и неудобной записи: findMax(group1PracticeTime[0], group1PracticeTime[1], group1PracticeTime[2], group1PracticeTime[3], group1PracticeTime[4]
+        console.log(maxTimeFromGroup1); // 160
+        const maxTimeFromGroup2 = findMax(...group2PracticeTime);
+        console.log(maxTimeFromGroup2); // 140
+        // А можем объединить два массива в один — это очень частая операция, и оператор расширения(spread) очень в этом помогает.
+        const bothGroupsTime = [...group1PracticeTime, ...group2PracticeTime];
+        // Для объединения двух массивов нам нужно вытащить их элементы в один общий
+        // массив, поэтому мы объявляем новый массив, а в качестве его элементов делаем
+        const maxTimeBothGroups = findMax(...bothGroupsTime);
+        console.log(maxTimeBothGroups); // 160
+
+        const saveFullNameInDB = (firstName, lastName, ...additionals) => {
+            saveFirstName(firstName);
+            saveLastName(lastName);
+            saveAdditionals(additionals); // Благодаря rest оператору мы смогли собрать все
+            //дополнительные данные, которые были переданы для сохранения в базе данных, и можем
+            //передать их одним массивом в функцию сохранения дополнительных данных.
+        }
+
+        const divElement = document.querySelector('content')
+        console.log(divElement.childNodes.length) // 7
+        console.log(divElement.children.length) // 3
+
+        divElement.childNodes.forEach((childNode) => {
+            console.log('childNode "%s" типа "%d"', childNode.nodeName, childNode.nodeType)
+        });
+
+        [...divElement.children].forEach((child) => {
+            console.log('child "%s" типа "%d"', child.nodeName, child.nodeType)
+        });
+    </script>
+</body>
+
+</html>
