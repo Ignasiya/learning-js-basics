@@ -4,69 +4,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Seminar 8</title>
+    <title>Seminar 9</title>
     <style>
-        .click {
-            background-color: red;
+        .animate_animated {
+            visibility: visible;
+        }
+
+        .message {
+            visibility: hidden;
+        }
+
+        .error {
+            border: 1px solid red;
         }
     </style>
 </head>
 
 <body>
-    <!--Домашка-->
-    <div class="container">
-        <p class="super_element">Привет</p>
-        <img src="https://placeimg.com/50/50/animals" alt="">
-        <img src="https://placeimg.com/50/50/arch" alt="">
-        <img src="https://placeimg.com/50/50/nature" alt="">
-        <img src="https://placeimg.com/50/50/people" alt="">
-        <img src="https://placeimg.com/50/50/tech" alt="">
-        <img src="https://placeimg.com/50/50/tech/grayscale" alt="">
-        <img src="https://placeimg.com/50/50/tech/sepia" alt="">
-        <br>
-        <button>Кнопка</button>
-        <button class="super_element">Кнопка с классом btn</button>
-        <button>Кнопка</button>
-        <br>
-        <textarea></textarea>
-        <br>
-        <ul>
-            <li>
-                <button>Кнопка 1</button>
-            </li>
-            <li>
-                <button>Кнопка 2</button>
-            </li>
-            <li>
-                <button>Кнопка 3</button>
-            </li>
-            <li>
-                <button>Кнопка 4</button>
-            </li>
-        </ul>
-    </div>
-    <!--Задание 1-->
-    <button class="btn">Нажми меня</button>
-    <!--Задание 2-->
-    <button class="btn-2">1</button>
-    <button class="btn-2">2</button>
-    <button class="btn-2">3</button>
-    <button class="btn-4">4</button>
-    <button class="btn-5">5</button>
-    <!--Задание 3-->
-    <button class="titleH1">title</button>
-    <button class="deleteTitleH1">delete</button>
-    <button class="overBtn">over</button>
-    <!--Задание 4-->
-    <ul class="menu">
-        <li class="list">Текст1</li>
-        <li class="list">Текст2</li>
-        <li class="list">Текст3</li>
-    </ul>
-    <button class="addBtn">add</button>
-    <button class="removeBtn">remove</button>
-    <button class="addClassBtn">class</button>
+    <div class="content"></div>
+    <div class="homework">
+        <input id="from" type="text">
+        В инпуте написано: <span></span>
 
+        <br>
+
+        <button class="messageBtn">Показать блок</button>
+        <div class="message">
+            Привет
+        </div>
+
+        <br>
+
+        <form id="myForm">
+            <label>
+                Первый инпут:
+                <input class="form-control" type="text" id="input1">
+            </label>
+            <br>
+            <br>
+            <label>
+                Второй инпут:
+                <select class="form-control" id="input2">
+                    <option value=""></option>
+                    <option value="1">Один</option>
+                    <option value="2">Два</option>
+                </select>
+            </label>
+            <br>
+            <br>
+            <button type="submit">Отправить</button>
+        </form>
+    </div>
     <script src="script.js"></script>
 </body>
 

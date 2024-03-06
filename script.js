@@ -1,157 +1,183 @@
-"use strict";
 // Домашка
-/*1. Необходимо вывести сообщение в консоль "все теги прогрузились", когда все теги будут созданы браузером.*/
-document.addEventListener('DOMContentLoaded', () => {
-    console.log('Все теги прогрузились');
-});
 
-/*2. Необходимо вывести сообщение в консоль "страница загрузилась", когда все ресурсы страницы будут загружены.*/
-window.onload = () => {
-    console.log('Страница загрузилась');
-};
+/*1. При изменении значения в input с id="from", значение содержащееся в нем должно моментально отображаться в span. То есть при печати в input'е тег span также должен меняться.*/
 
-/*3. При клике на какой-либо тег на странице в консоль должно выводиться сообщение наподобие:
-- Класс "super_element" присутствует в элементе "div".
-- сообщение должно определять присутствует или отсутствует класс "super_element"
-- у элемента, а также выводить в нижнем регистре верный тег в данной строке, по
-- которому был совершен клик.
-- Необходимо использовать делегирование.*/
-const parent = document.querySelector('.container');
-
-parent.addEventListener('click', (e) => {
-    if (e.target.classList.contains('super_element')) {
-        console.log(`Класс "super_element" присутствует в элементе "${e.target.tagName.toLowerCase()}".`);
-    } else {
-        console.log(`Класс "super_element" отсутствует в элементе "${e.target.tagName.toLowerCase()}".`);
-    }
-});
-
-/*4. Сделайте, чтобы при наведении на textarea в консоли появлялось сообщение: "Вы навели на textarea."*/
-const textarea = document.querySelector('textarea');
-
-textarea.addEventListener('mouseenter', () => {
-    console.log('Вы навели на textarea.');
-});
-
-/*5. Необходимо повесить событие клика на тег ul. В обработчике события в консоль необходимо выводить текст, который записан внутри элемента кнопки, по которой был произведен клик. Если клик был не по кнопке, то ничего выводить не нужно. Необходимо использовать делегирование.*/
-const ulEl = document.querySelector('ul');
-
-ulEl.addEventListener('click', (e) => {
-    if (e.target.tagName === 'BUTTON') {
-        console.log(e.target.textContent);
-    }
+const HwInput = document.querySelector('div.homework #from')
+const HwSpan = document.querySelector('div.homework span')
+console.log(HwInput, HwSpan);
+HwInput.addEventListener('input', (e) => {
+    HwSpan.textContent = event.target.value;
 })
 
-/*6. Вопрос: Почему в console.log пишется сначала текст из 5 задания и только потом выводится текст из 3 задания, если мы кликаем по кнопкам в ul? Ответ необходимо написать здесь же, под этим комментарием, своими словами.
+/* 2. При клике на кнопку с классом messageBtn необходимо элементу с классом message:
+- добавить два класса: animate_animated и animate_fadeInLeftBig
+- поставить данному элементу стиль visibility в значение 'visible'.*/
 
-Это происходит из-за всплытия событий в DOM. Когда мы кликаем на кнопку в списке, сначала срабатывает обработчик события клика для этой кнопки (задание 5). Затем событие продолжает всплывать по иерархии DOM до super_element и срабатывает его обработчик события клика (задание 3).*/
+const HwMessageBtn = document.querySelector('div.homework button.messageBtn')
+const HwMessage = document.querySelector('div.homework div.message')
 
-/*7. С помощью JS необходимо изменить цвет заднего фона каждого второго тега li.*/
-const listItems = document.querySelectorAll('li');
-
-for (let i = 0; i < listItems.length; i++) {
-    if ((i + 1) % 2 === 0) {
-        listItems[i].style.backgroundColor = 'yellow';
-    }
-}
-
-// Семинар: Задание 1
-const btnEL = document.querySelector('.btn');
-
-window.onload = () => {
-    console.log('Страница загрузилась');
-}
-
-document.addEventListener('DOMContentLoaded', (e) => {
-    console.log('Страница загрузилась');
+HwMessageBtn.addEventListener('click', function (e) {
+    HwMessage.classList = ("animate_animated " + "animate_fadeInLeftBig")
 });
 
-btnEL.onclick = () => {
-    console.log('Событие onclick');
-};
+/*3. Необходимо при отправке формы проверить, заполнены ли все поля в этой форме. Если какое-либо поле не заполнено, форма не должна отправляться, также должны быть подсвечены незаполненные поля (необходимо поставить класс error незаполненным полям). Как только пользователь начинает заполнять какое-либо поле, необходимо, при вводе в данное поле, произвести проверку:
+- Если поле пустое, необходимо данное поле подсветить (поставить класс error данному полю).
+- Если поле было чем-либо заполнено, подсветку (класс error) необходимо убрать.*/
 
-btnEL.addEventListener('click', (e) => {
-    console.log('Событие addEventListener');
+const form = document.querySelector('#myForm');
+const input1 = document.querySelector('#input1');
+const input2 = document.querySelector('#input2');
+
+form.addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    (input1.value === '') ? input1.classList.add('error') : input1.classList.remove('error');
+
+    (input2.value === '') ? input2.classList.add('error') : input2.classList.remove('error');
+
+    if (input1.value !== '' && input2.value !== '') {
+        form.submit();
+    }
+});
+
+input1.addEventListener('input', function () {
+    if (input1.value === '') {
+        input1.classList.add('error');
+    } else {
+        input1.classList.remove('error');
+    }
+});
+
+input2.addEventListener('change', function () {
+    if (input2.value === '') {
+        input2.classList.add('error');
+        input2.classList.remove('error');
+    }
+});
+
+// Задание 1
+const root = document.querySelector('.content');
+
+const formEl = document.createElement('form');
+formEl.setAttribute('action', '#');
+
+const checkBoxEl = document.createElement('input');
+checkBoxEl.setAttribute('type', 'checkbox');
+checkBoxEl.id = 'checkbox';
+
+const labelEl = document.createElement('label');
+labelEl.setAttribute('for', 'checkbox');
+labelEl.textContent = 'Согласен с условиями';
+
+const btnEl = document.createElement('button');
+btnEl.type = 'submit';
+btnEl.textContent = 'Отправить';
+btnEl.setAttribute('class', 'submit');
+
+formEl.appendChild(checkBoxEl);
+formEl.appendChild(labelEl);
+formEl.appendChild(btnEl);
+
+root.appendChild(formEl);
+
+btnEl.addEventListener('click', (e) => {
+    if (!checkBoxEl.checked) {
+        e.preventDefault();
+
+        const error = formEl.querySelector('.error');
+        if (!error) {
+            const errorEl = document.createElement('div');
+            errorEl.classList.add('error');
+            errorEl.textContent = 'Необходимо согласиться с условиями';
+            labelEl.after(errorEl);
+        }
+    }
 });
 
 // Задание 2
-const btnEls = document.querySelectorAll('.btn-2');
-const btnEl4 = document.querySelector('.btn-4');
-const btnEl5 = document.querySelector('.btn-5');
+const radioTea = document.createElement('input');
+radioTea.classList.add('radio-tea')
+radioTea.type = 'radio';
+radioTea.name = 'beverage';
+radioTea.value = 'tea';
 
-btnEls.forEach(element => {
-    element.addEventListener('click', (event) => {
-        console.log(event.target.innerHTML);
-    });
-});
+const radioCoffee = document.createElement('input');
+radioCoffee.classList.add('radio-coffee')
+radioCoffee.type = 'radio';
+radioCoffee.name = 'beverage';
+radioCoffee.value = 'coffee';
 
-let count = 0;
+const labelTea = document.createTextNode('Чай');
+const labelCoffee = document.createTextNode('Кофе');
 
-const counter = () => {
-    console.log(`На кнопку нажали ${++count} раз`);
-}
+const formRadioEl = document.createElement('form');
+formRadioEl.setAttribute('action', '#');
 
-btnEl4.addEventListener('click', counter)
+root.appendChild(formRadioEl);
+formRadioEl.appendChild(radioTea);
+formRadioEl.appendChild(labelTea);
+formRadioEl.appendChild(radioCoffee);
+formRadioEl.appendChild(labelCoffee);
 
-btnEl5.addEventListener('click', (e) => {
-    btnEl5.textContent = 'Вы нажали на эту кнопку';
+const message = document.createElement('p');
+formRadioEl.appendChild(message);
+
+const btnRadioEl = document.createElement('button');
+btnRadioEl.type = 'submit';
+btnRadioEl.textContent = 'Отправить';
+btnRadioEl.setAttribute('class', 'submit');
+formRadioEl.appendChild(btnRadioEl);
+
+formRadioEl.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const selected = document.querySelector('input[name="beverage"]:checked');
+
+    if (selected) {
+        const beverageValue = selected.value;
+
+        if (beverageValue === "tea") {
+            message.textContent = "Чай закончился";
+        } else if (beverageValue === "coffee") {
+            message.textContent = "Кофе закончился";
+        }
+    }
 });
 
 // Задание 3
-const titleBtnEl = document.querySelector('.titleH1');
-const deleteTitleBtnEl = document.querySelector('.deleteTitleH1');
-const overBtnEl = document.querySelector('.overBtn');
+const formPassEl = document.createElement('form');
+formRadioEl.setAttribute('action', '#');
 
-titleBtnEl.addEventListener('click', (e) => {
-    const title = document.createElement('h1');
-    title.innerText = 'Новый заголовок';
-    titleBtnEl.after(title);
-});
+const inputPassEL = document.createElement('input');
+inputPassEL.type = 'password';
 
-deleteTitleBtnEl.addEventListener('click', (e) => {
-    const titles = document.querySelectorAll('h1');
-    if (titles.length > 0) {
-        titles[titles.length - 1].remove();
-    }
-});
+const btnPassEl = document.createElement('button');
+btnPassEl.type = 'submit';
+btnPassEl.textContent = 'Отправить';
 
-overBtnEl.addEventListener('mouseover', (e) => {
-    console.log('Вы навели на данную кнопку');
-});
+formPassEl.appendChild(inputPassEL);
+formPassEl.appendChild(btnPassEl);
+root.append(formPassEl);
 
-overBtnEl.addEventListener('mouseleave', (e) => {
-    console.log('Наведения на кнопку больше нет');
-});
-
-// Задание 4
-const addBtnEl = document.querySelector('.addBtn');
-const menuEl = document.querySelector('.menu');
-const removeBtnEl = document.querySelector('.removeBtn');
-const classBtnEl = document.querySelector('.addClassBtn');
-
-let counetEl = 0;
-
-addBtnEl.addEventListener('click', (e) => {
-    const li = document.createElement('li');
-    li.setAttribute('class', 'list');
-    li.innerText = 'новый элемент списка' + ++counetEl;
-    menuEl.appendChild(li);
-    li.addEventListener('click', (e) => {
-        e.target.remove();
-    });
-});
-
-removeBtnEl.addEventListener('click', (e) => {
-    const firstLi = menuEl.querySelector('li');
-    if (firstLi) {
-        menuEl.removeChild(firstLi);
+inputPassEL.addEventListener('input', (e) => {
+    const input = event.target.value.toLocaleLowerCase();
+    if (input === 'password') {
+        inputPassEL.style.border = '4px solid green'
+    } else {
+        inputPassEL.style.border = '4px solid red'
     }
 })
 
-menuEl.addEventListener('click', (e) => {
-    console.log(e.target);
-});
+// Задание 4
+const inputEl = document.createElement('input');
+inputEl.type = 'text'
 
-classBtnEl.addEventListener('click', (e) => {
-    e.target.setAttribute('class', 'click')
+const titleEl = document.createElement('h1');
+titleEl.textContent = 'Заголовок';
+
+root.appendChild(inputEl);
+root.appendChild(titleEl);
+
+inputEl.addEventListener('keyup', (e) => {
+    titleEl.textContent = event.target.value;
 })
