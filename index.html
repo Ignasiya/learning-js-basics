@@ -4,57 +4,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Seminar 9</title>
+    <title>Document</title>
     <style>
-        .animate_animated {
-            visibility: visible;
-        }
-
-        .message {
-            visibility: hidden;
-        }
-
-        .error {
-            border: 1px solid red;
+        .news-container {
+            width: 600px;
+            border: 2px solid black;
+            margin-top: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
     </style>
 </head>
 
 <body>
-    <div class="content"></div>
-    <div class="homework">
-        <input id="from" type="text">
-        В инпуте написано: <span></span>
-
-        <br>
-
-        <button class="messageBtn">Показать блок</button>
-        <div class="message">
-            Привет
-        </div>
-
-        <br>
-
-        <form id="myForm">
-            <label>
-                Первый инпут:
-                <input class="form-control" type="text" id="input1">
-            </label>
-            <br>
-            <br>
-            <label>
-                Второй инпут:
-                <select class="form-control" id="input2">
-                    <option value=""></option>
-                    <option value="1">Один</option>
-                    <option value="2">Два</option>
-                </select>
-            </label>
-            <br>
-            <br>
-            <button type="submit">Отправить</button>
-        </form>
-    </div>
+    <div class="container"></div>
+    <div class="homework"></div>
+    <script src="data.js"></script>
     <script src="script.js"></script>
 </body>
 
