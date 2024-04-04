@@ -64,7 +64,11 @@ window.onload = () => {
 
 document.addEventListener('DOMContentLoaded', (e) => {
     console.log('Страница загрузилась');
-});
+}); // изображения, стили и скрипты, могут быть еще не загружены
+
+window.addEventListener('load', function (e) {
+    console.log('Страница загрузилась');
+}); // полная загузка страницы
 
 btnEL.onclick = () => {
     console.log('Событие onclick');
