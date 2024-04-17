@@ -1,5 +1,7 @@
 import dataProducts from './data.js';
 
+const data = JSON.parse(dataProducts);
+
 const rootEl = document.querySelector('.product-list');
 
 const xsvg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
@@ -72,7 +74,7 @@ dataProducts.forEach(product => {
     inputEl.id = 'quantity';
     inputEl.name = 'quantity';
     inputEl.min = '1';
-    inputEl.value = '1';
+    inputEl.value = product.quantity;
     quantityEl.appendChild(inputEl);
 
     const deleteEl = document.createElement('a');
